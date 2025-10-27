@@ -1,6 +1,4 @@
 linters-settings:
-  govet:
-    check-shadowing: true
   gocyclo:
     min-complexity: 15
   dupl:
@@ -24,6 +22,7 @@ linters:
     - govet
     - ineffassign
     - misspell
+    - shadow
     - staticcheck
     - typecheck
     - unconvert
@@ -32,10 +31,10 @@ linters:
 
 run:
   timeout: 5m
-  skip-dirs:
-    - vendor
 
 issues:
+  exclude-dirs:
+    - vendor
   exclude-rules:
     # Exclude some linters from running on tests files.
     - path: _test\.go

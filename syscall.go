@@ -45,8 +45,9 @@ func proc_name(pid int, buffer unsafe.Pointer, buffersize uint32) (ret int, err 
 }
 
 func PidName(pid int) (string, error) {
-	buf := make([]byte, 2*1024) // MAXCOMLEN is typically 16, but buffer for safety
-	n, err := proc_name(pid, unsafe.Pointer(&buf[0]), uint32(len(buf)))
+	const bufSize = 2 * 1024 // MAXCOMLEN is typically 16, but buffer for safety
+	buf := make([]byte, bufSize)
+	n, err := proc_name(pid, unsafe.Pointer(&buf[0]), bufSize)
 	if err != nil {
 		return "", err
 	}
